@@ -4,7 +4,10 @@ require('dotenv').config();
 //declare variables of dependencied libs
 let express = require("express");
 
-//declare variable of custom middlewares
+//declare variables of models
+let User = require("./models/users.model");
+
+//declare variables of custom middlewares
 let userRoute = require("./routes/user.route");
 
 
@@ -15,6 +18,9 @@ app.set('views', './views')
 app.set('view engine', 'pug')
 
 //using needed middlewares
+
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 
 //get methods
@@ -32,7 +38,11 @@ app.use("/user", userRoute);
 
 
 //post methods
-
+app.post("/register", (req, res) => {
+	//server side validate
+	let err = [];
+	
+})
 
 
 //
