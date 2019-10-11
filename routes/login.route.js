@@ -5,11 +5,12 @@ let express = require("express");
 let User = require("../models/users.model");
 
 //declare controller
-let controller = require("../controllers/user.controller");
+let controller = require("../controllers/login.controller");
 
 //declare router
 let router = express.Router();
 
 router.get("/", controller.index);
+router.post("/", controller.login);
 
 module.exports = router;

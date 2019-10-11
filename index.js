@@ -1,15 +1,17 @@
-// config
-require('dotenv').config();
+//config
+require('dotenv').config(); //read enviroment variables in .env file
 
 //declare variables of dependencied libs
 let express = require("express");
+let mongoose = require("mongoose");
 
-//declare variables of models
-let User = require("./models/users.model");
+//connect to database
+mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true});
 
 //declare variables of custom middlewares
+let loginRoute = require("./routes/login.route");
+let signupRoute = require("./routes/signup.route");
 let userRoute = require("./routes/user.route");
-
 
 let app = express();
 
@@ -18,31 +20,15 @@ app.set('views', './views')
 app.set('view engine', 'pug')
 
 //using needed middlewares
-
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
-
-//get methods
-
-app.get("/", (req, res) => {
-	res.render("pages/login")
-})
-
-app.get("/register", (req, res) => {
-	res.render("pages/register")
-})
-
 // apply route middlewares
+app.use("/", loginRoute);
+app.use("/signup", signupRoute);
 app.use("/user", userRoute);
 
 
-//post methods
-app.post("/register", (req, res) => {
-	//server side validate
-	let err = [];
-	
-})
 
 
 //
