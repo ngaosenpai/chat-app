@@ -8,8 +8,7 @@ module.exports.index = (req, res) => {
 module.exports.createUser = (req, res) => {
 	//
 	console.log("validated!");
-	console.log(res.locals.data);
-	console.log(res.locals.data.name);
-	console.log(res.locals.data.account);
-	console.log(res.locals.data.password);
+	console.log(res.locals);
+	res.render("pages/register")
+
 }

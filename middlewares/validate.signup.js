@@ -3,52 +3,55 @@ let User = require("../models/users.model");
 
 module.exports.postSignup = (req, res, next) => {
 	let err = [];
-	let data = {};
 
-	let checkName = (err, data) => {
-		return new Promise((res,rej) => {
+	let checkName = (err) => {
+		return new Promise((resolve, reject) => {
 			User.findOne({name: req.body.accName}, (error, result) => {
 				if(!result){
-					data.name = req.body.accName;
-					res()
+					resolve(res.locals.name = req.body.accName)
 				} else {
-					err.push("This name was used !");
+					return reject("This name was used !");
 				}
 			})
 		})
 	}
-	let checkAccount = (err, data) => {
-		return new Promise((res,rej) => {
+	let checkAccount = (err) => {
+		return new Promise((resolve, reject) => {
 			User.findOne({account: req.body.account}, (error, result) => {
 				
 				if(!result){
-					data.account = req.body.account;
-					res()
+					resolve(res.locals.account = req.body.account)
 				} else {
-					err.push("This account was used !");
+					return reject("This account was used !");
 				}
 			})
 		})
 	}
-
-	if(req.body.password !== req.body.rePassword){
-		err.push("Your retype password does not match !");
+	let checkMatch = (err) => {
+		return new Promise((resolve, reject) => {
+			if(req.body.password !== req.body.rePassword){
+				reject("Your retype password does not match !")
+			} else {
+				resolve(res.locals.password = req.body.password)
+			}
+		})
 	}
-	checkName(err, data)
-	.then(() => checkAccount(err, data))
+	
+	checkName(err)
+	.then(() => checkAccount(err))
+	.then(() => checkMatch(err))
 	.then(() => {
-		data.password = req.body.password;
+		next();
+	})
+	.catch((error) => {
+		err.push(error);
+		if(err.length){
+			res.render("pages/register",{
+				errors: err
+			});
+		}
 	});
 
-	if(err.length){
-		res.render("pages/register",{
-			errors: err
-		});
-		return ;
-	} else {
-		res.locals.data = data;
-		next();
-	}
 }
 
 
