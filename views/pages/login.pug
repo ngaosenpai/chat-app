@@ -2,3 +2,5 @@ extends ../layouts/common.pug
 
 block content
 	h1 here is login page
+	if message
+		div(class="alert alert-success", role="alert")=message

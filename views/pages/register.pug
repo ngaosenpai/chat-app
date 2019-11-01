@@ -5,6 +5,9 @@ block content
 	.container
 		.row.justify-content-center
 			.col-sm-8.col-md-6
+				if errors
+					each error in errors
+						div(class="alert alert-danger", role="alert")=error
 				form(action="/signup", method="POST").bg-dark.text-light.d-flex.flex-column.rounded.p-3.mt-5
 					h3.text-center Sign up form
 					.form-group
