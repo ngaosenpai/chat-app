@@ -1,13 +1,13 @@
 //config
 require('dotenv').config(); //read enviroment variables in .env file
 
-//ddeclare flash (module support send message)
-let flash = require('connect-flash');
+// //ddeclare flash (module support send message)
+// let flash = require('connect-flash');
 //declare variables of dependencied libs
 let express = require("express");
 //
-let cookieParser = require('cookie-parser')
-let session = require('express-session')
+// let cookieParser = require('cookie-parser')
+// let session = require('express-session')
 //
 let mongoose = require("mongoose");
 //connect to database
@@ -24,18 +24,18 @@ let app = express();
 app.set('views', './views')
 app.set('view engine', 'pug')
 //use cookieParser middleware
-app.use(cookieParser())
-// use session middleware
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
-}))
+// app.use(cookieParser())
+// // use session middleware
+// app.use(session({
+//   secret: 'keyboard cat',
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: { secure: true }
+// }))
   
-// Use connect-flash middleware.  This will add a `req.flash()` function to
-// all requests, matching the functionality offered in Express 2.x.
-app.use(flash());
+// // Use connect-flash middleware.  This will add a `req.flash()` function to
+// // all requests, matching the functionality offered in Express 2.x.
+// app.use(flash());
 
 //using needed middlewares
 app.use(express.json()) // for parsing application/json

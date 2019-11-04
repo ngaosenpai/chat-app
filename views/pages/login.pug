@@ -1,6 +1,21 @@
 extends ../layouts/common.pug
 
 block content
-	h1 here is login page
-	if message
+	h1.text-center Login page
+	if message != ""
 		div(class="alert alert-success", role="alert")=message
+	.container
+		.row.justify-content-center
+			.col-sm-8.col-md-6
+				form.bg-dark.text-light.d-flex.flex-column.rounded.p-3.mt-5(action='/', method='POST')
+					h3.text-center Login form
+					.form-group
+						label(for='acc') Your account:
+						input#acc.form-control(type='text', name='account', placeholder='Type your account...')
+					.form-group
+						label(for='pass') Your password:
+						input#pass.form-control(type='password', name='password', placeholder='Type your password...')
+					div
+						label(for='signup') Have no account?
+						a#signup(href='/signup') Signup for free
+					button.btn.btn-primary(type='submit') Login

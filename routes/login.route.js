@@ -7,10 +7,12 @@ let User = require("../models/users.model");
 //declare controller
 let controller = require("../controllers/login.controller");
 
+let validate = require("../middlewares/validate.login");
+
 //declare router
 let router = express.Router();
 
 router.get("/", controller.index);
-router.post("/", controller.login);
+router.post("/", validate.postLogin, controller.login);
 
 module.exports = router;
