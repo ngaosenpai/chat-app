@@ -4,5 +4,5 @@ module.exports.index = (req, res) => {
 	});
 };
 module.exports.login = (req, res) => {
-	//
+	res.send("ok")
 }
