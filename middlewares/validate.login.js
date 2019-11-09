@@ -9,6 +9,7 @@ module.exports.postLogin = (req, res, next) => {
 		bcrypt.compare(req.body.password, user.password)
 		.then(result => {
 			if(result){
+				res.locals.userId = user._id
 				next()
 			} else {
 				res.render("pages/login", {

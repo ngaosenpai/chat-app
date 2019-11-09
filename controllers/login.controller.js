@@ -4,5 +4,8 @@ module.exports.index = (req, res) => {
 	});
 };
 module.exports.login = (req, res) => {
-	res.send("ok")
+	res.cookie("user_id", res.locals.userId, {
+		signed : true
+	})
+	res.redirect("/user")
 }
