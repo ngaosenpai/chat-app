@@ -1,3 +1,5 @@
 module.exports.index = (req, res) => {
-	res.send("user page")
+	res.render("pages/user", {
+		id : req.signedCookies.user_id
+	})
 };

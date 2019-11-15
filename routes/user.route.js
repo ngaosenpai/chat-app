@@ -12,4 +12,6 @@ let router = express.Router();
 
 router.get("/", controller.index);
 
+router.post("/:id", controller.postUser);
+
 module.exports = router;

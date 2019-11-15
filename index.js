@@ -1,8 +1,7 @@
 //config
 require('dotenv').config(); //read enviroment variables in .env file
 
-// //ddeclare flash (module support send message)
-// let flash = require('connect-flash');
+
 //declare variables of dependencied libs
 let express = require("express");
 //
@@ -20,6 +19,9 @@ let userRoute = require("./routes/user.route");
 let authorizing = require("./middlewares/authorized.login");
 
 let app = express();
+//
+var server = require('http').Server(app);
+var io = require('socket.io')
 
 //set view engine
 app.set('views', './views')
@@ -50,6 +52,9 @@ app.use("/user", authorizing.checkAuth, userRoute);
 
 
 //
-app.listen(process.env.PORT, () => {
+server.listen(process.env.PORT, () => {
 	console.log(`server is running on port ${process.env.PORT}`);
 })
+
+// use io for socketio
+let socketControl = require("./socketControl")(io);
