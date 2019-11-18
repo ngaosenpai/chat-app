@@ -3,7 +3,7 @@ extends ../layouts/common.pug
 block content
 	.container
 		.bg-primary.p-2
-			h3#name
+			h3=name
 		.row.justify-content-center
 			.col-sm-8.col-md-6
 				.d-flex.flex-column(style='height:90vh')
@@ -12,4 +12,4 @@ block content
 						input.flex-grow-1(type='text')
 						button#btn.btn.btn-primary.ml-2 Send
 	script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js')
-	script(src="../../client.js")
+	script(src="/client.js")

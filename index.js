@@ -16,16 +16,18 @@ mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true});
 let loginRoute = require("./routes/login.route");
 let signupRoute = require("./routes/signup.route");
 let userRoute = require("./routes/user.route");
+let chatRoute = require("./routes/chat.route");
 let authorizing = require("./middlewares/authorized.login");
 
 let app = express();
 //
-var server = require('http').Server(app);
-var io = require('socket.io')
+let server = require('http').Server(app);
+
 
 //set view engine
 app.set('views', './views')
 app.set('view engine', 'pug')
+app.use(express.static('public'))
 // // use session middleware
 // app.use(session({
 //   secret: 'keyboard cat',
@@ -47,14 +49,14 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 app.use("/", loginRoute);
 app.use("/signup", signupRoute);
 app.use("/user", authorizing.checkAuth, userRoute);
-
-
+app.use("/chat", authorizing.checkAuth, chatRoute);
 
 
 //
 server.listen(process.env.PORT, () => {
 	console.log(`server is running on port ${process.env.PORT}`);
 })
+let io = require('socket.io')(server)
 
 // use io for socketio
 let socketControl = require("./socketControl")(io);
