@@ -3,7 +3,7 @@ let mongoose = require("mongoose");
 let userSchema = new mongoose.Schema({
 	name: String,
 	account: String,
-	password: String
+	password: String,
 });
 
 let User = mongoose.model("User", userSchema, "users")
