@@ -10,7 +10,11 @@ let cookieParser = require('cookie-parser')
 //
 let mongoose = require("mongoose");
 //connect to database
-mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true});
+mongoose.connect(process.env.DATABASE_URL, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+	useFindAndModify : false
+});
 
 //declare variables of custom middlewares
 let loginRoute = require("./routes/login.route");
