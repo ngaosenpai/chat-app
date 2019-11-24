@@ -1,8 +1,6 @@
 let mongoose = require("mongoose");
 let connectionSchema = new mongoose.Schema({
-	connectionKey : String,
-	user1 : String,
-	user2: String,
+	connectKey : String,
 	msg : [{
 		sender : String,
 		content : String,
